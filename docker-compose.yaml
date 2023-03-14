@@ -31,7 +31,18 @@ services:
       - 8182:80
     networks:
       - postgres
-
+  minetest:
+    image: lscr.io/linuxserver/minetest:latest
+    container_name: minetest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./storage/mintest:/config/.minetest
+    ports:
+      - 30000:30000/udp
+    restart: unless-stopped
 
 networks:
   postgres:
