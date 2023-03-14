@@ -7,6 +7,7 @@
 |Apache|`php:8.2-apache`            |
 |Postgres & Postgis        |`postgres`            
 |Pgadmin          |`dpage/pgadmin4`
+|Minetest          |`lscr.io/linuxserver/minetest`
 
 
 ## Compose file
@@ -37,6 +38,9 @@ Nous lui assignons aussi un network particulier pour qu'il puisse ensuite commun
 **PGADMIN**
 Pour cette image, nous avons redirigé le port de base 	80 vers le port 8182.
 Nous avons aussi défini le network utilisé sur celui crée pour postgres afin qu'il puisse communiquer avec.
+
+**MINETEST**
+Nous stockons toutes les données du serveur a l'aide du volume `./storage/mintest:/config/.minetest`
 
 **Networks**
 Enfin, nous definissons le network `postgres`utilisé par postgres et pgadmin.
