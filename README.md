@@ -5,9 +5,8 @@
 |Service         |Image                                            
 |----------------|-------------------------------
 |Apache|`php:8.2-apache`            |
-|Postgres & Postgis        |`postgres`            
-|Pgadmin          |`dpage/pgadmin4`
-|Minetest          |`lscr.io/linuxserver/minetest`
+|MySQL       |`mysql`            
+|PhpMyAdmin          |`dpage/pgadmin4`
 
 
 ## Compose file
@@ -24,33 +23,14 @@ Nous utilisons la version: 3.8
 
 Nous redirigeons ensuite le port de base du serveur vers le port 8185 pour eviter tout conflits avec la machine 'host'
 
-**POSTGRES**
-Pour ce container nous utilisons un processus plus particulier.
-A l'aide de `build`et du fichier Dockerfile situé dans `/postgres`
-Le contenu de ce fichier sera expliqué plus bas.
-Nous ne redirigeons pas le port car il semble immuable, nous essayons de trouver une solution.
-Nous lui donnons tout de même un volume pour eviter la perte de toute les données des base de données crée sur le container avec cette ligne
+**MYSQL**
 
-`- ./storage/postgres:/var/lib/postgresql/data`
+Nous avons installé mysql et lui avons donné un storage a /storage/mysql pour sauvegarder les données de la BDD. Nous n'avons pas redirigé le port de base vers un port spécial cette fois ci.
 
-Nous lui assignons aussi un network particulier pour qu'il puisse ensuite communiquer avec pgadmin.
+**PhpMyAdmin**
 
-**PGADMIN**
-Pour cette image, nous avons redirigé le port de base 	80 vers le port 8182.
-Nous avons aussi défini le network utilisé sur celui crée pour postgres afin qu'il puisse communiquer avec.
-
-**MINETEST**
-Nous stockons toutes les données du serveur a l'aide du volume `./storage/mintest:/config/.minetest`
-
-**Networks**
-Enfin, nous definissons le network `postgres`utilisé par postgres et pgadmin.
-
-## Dockerfile
-
-le Dockerfile que l'on a crée est très basique.
-`FROM postgres` indique que l'image utilisée dans le container sera postgres.
-`RUN apt-get update && apt-get upgrade -y`met a jour les dépendences de la machine.
-`RUN apt-get install postgis -y` installe postgis dans la base de donnée. 
+Nous avons installé PhpMyAdmin pour gérer la BDD avec les utilisateur et mots de passe défini par défault. 
+Nous avons redirigé le port par défault 80 vers le port 8185 afin que l'on puisse utiliser PhpMyadmin sans se priver du serveur Apache qui sert pour la SAE.
 
 ## Storage
 
