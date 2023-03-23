@@ -6,7 +6,7 @@
 |----------------|-------------------------------
 |Apache|`php:8.2-apache`            |
 |MySQL       |`mysql`            
-|PhpMyAdmin          |`dpage/pgadmin4`
+|PhpMyAdmin          |`phpmyadmin/phpmyadmin`
 
 
 ## Compose file
